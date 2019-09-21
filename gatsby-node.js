@@ -8,19 +8,19 @@ module.exports.sourceNodes = async ({ actions, createNodeId, createContentDigest
 
     const { createNode } = actions;
 
-    const urls = await getImageURIs(options.account);
+    const images = await getImageURIs(options.account);
 
-    for (let img of urls) {
-        const id = createNodeId(`ig-photo-${img}`);
+    for (let image of images) {
+        const id = createNodeId(`ig-photo-${image.src}`);
         try {
             const node = ({
                 id,
-                src: img,
+                ...image,
                 parent: null,
                 children: [],
                 internal: {
                     type: 'InstagramPhoto',
-                    contentDigest: createContentDigest(img),
+                    contentDigest: createContentDigest(image),
                 }
             });
 

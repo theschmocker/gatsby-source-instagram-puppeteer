@@ -6,30 +6,15 @@ module.exports.getImageURIs = async function getImageURIs(account) {
 
     await page.goto(`https://instagram.com/${account}`);
 
-    // await autoScroll(page);
-
-    const uris = await page.$$eval('main div article img', imgs => imgs.map(img => img.src));
+    const images = await page.$$eval(
+        'main div article img',
+        imgs => imgs.map(({ src, alt }) => ({
+            src,
+            alt
+        }))
+    );
 
     await browser.close();
 
-    return uris;
+    return images;
 };
-
-async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if(totalHeight >= scrollHeight){
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 250);
-        });
-    });
-}
