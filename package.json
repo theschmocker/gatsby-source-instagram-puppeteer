@@ -1,0 +1,12 @@
+{
+  "name": "gatsby-source-instagram-puppeteer",
+  "version": "0.1.0",
+  "description": "A Gatsby source plugin that scrapes an instagram profile to grab images (you should'nt use this)",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-source-filesystem": "^2.1.26",
+    "puppeteer": "^1.20.0"
+  }
+}
